@@ -2,7 +2,7 @@
 
 bookland.py - generate EAN-13 bar codes, including ISBN and ISMN
 
-Copyright (C) 1999-2007 Judah Milgram     
+Copyright (C) 1999-2023 Judah Milgram     
 
 This is free software and comes with NO WARRANTY. See file COPYING for
 license.

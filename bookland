@@ -1,12 +1,12 @@
-#!/usr/bin/python
+#!/bin/env python3
 
 MYNAME="bookland"
-MYVERSION="1.4.1 Beta"
-COPYRIGHT="(C) 1999-2011 J. Milgram"
-VERSIONDATE = "July 2011"
+MYVERSION="2.0.0"
+COPYRIGHT="(C) 1999-2023 J. Milgram"
+VERSIONDATE = "March 2023"
 MAINTAINER = "bookland-bugs@cgpp.com"
 
-#   Copyright (C) 1999-2011 Judah Milgram     
+#   Copyright (C) 1999-2023 Judah Milgram     
 #
 #   bookland - generate EAN-13 bar codes, including ISBN and ISMN.
 #
@@ -159,7 +159,7 @@ class Postscript:
         if max(cmyk)>1 or min(cmyk)<0:
             raise PostscriptError("cmyk value out of range")
 
-        bbox = map(int,self.bb)
+        bbox = [ int(corner) for corner in self.bb ]
         # int truncates towards zero.
         for i in range(len(bbox)):
             if bbox[i] > 0:
@@ -214,7 +214,7 @@ class Bars(Postscript):
                        "gsave",
                        "%s %s translate 0 0 moveto" % (x0,y0),
                        "/moduleHeight { %s } def" % moduleHeight,
-                       "/moduleWidth { %s } def" % moduleWidth,
+                       "/moduleWidth { %0.3f } def" % moduleWidth,
                        "/barWidthReduction { %s } def" % barWidthReduction]
         currentVal = None
         n = None
@@ -473,7 +473,7 @@ def doTheRightThing(s,font,price,moduleHeight,
     else:
         upc5=None
 
-    commandLine = string.join(sys.argv)
+    commandLine = ' '.join(sys.argv)
     epsComment = "%% Command line: %s" % commandLine
     creator = "%s %s" % (MYNAME,MYVERSION)
     title = str(productCode)
@@ -576,13 +576,13 @@ Usage: %s [-h|--help] [-V|--version] [-f|--font=fontname] [-q]
         elif opt in ("-a","--autofile"):
             outfile="auto"
         elif opt in ("--cmyk"):
-            cmyk = tuple(map(float,val.split(",")))
-	    if len(cmyk)!=4:
-               printUsage()
-               sys.exit(1)
+            cmyk = [float(x) for x in val.split(",")]
+            if len(cmyk)!=4:
+                printUsage()
+                sys.exit(1)
         elif opt in ("--rgb"):
             rgb = map(float,val.split(","))
-	    if len(rgb)!=3:
+            if len(rgb)!=3:
                printUsage()
                sys.exit(1)
             cmyk = rgbtocmyk(rgb)
@@ -611,9 +611,9 @@ Usage: %s [-h|--help] [-V|--version] [-f|--font=fontname] [-q]
 
     if checkonly:
         productCode = makeProductCode(s,forceISBN13=True)
-        print "%s understood as %s" % (s,productCode)
+        print('%s understood as %s' % (s,productCode))
         if productCode.type in [ "ISBN10", "ISMN" ]:
-            print "13-digit version: %s" % productCode.as13()
+            print('13-digit version: %s' % productCode.as13())
         sys.exit(0)
 
     try:
@@ -621,8 +621,8 @@ Usage: %s [-h|--help] [-V|--version] [-f|--font=fontname] [-q]
                                             barWidthReduction,zone,cmyk,
                                             labelScale,
                                             padding)
-    except ProductCodeError,e:
-        for msg in e.msgs: print msg
+    except ProductCodeError as e:
+        for msg in e.msgs: print(msg)
         printUsage()
         sys.exit(1)
 

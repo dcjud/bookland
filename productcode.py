@@ -1,11 +1,10 @@
-# #!/usr/bin/python
 #
 #   productcode.py - classes for Product Codes and bar code symbols
 #
 #   Focused on ISBN and ISMN bar codes but generally applicable to
 #   all EAN-13's.
 #
-#   Copyright (C) 2007 Judah Milgram     
+#   Copyright (C) 2007-2023 Judah Milgram     
 #
 #   This program is free software; you can redistribute it and/or
 #   modify it under the terms of the GNU General Public License
@@ -87,9 +86,9 @@ EAN13BITS = [{A:"0001101", B:"0100111", C:"1110010"},
              {A:"0111011", B:"0010001", C:"1000100"},
              {A:"0110111", B:"0001001", C:"1001000"},
              {A:"0001011", B:"0010111", C:"1110100"}]
-EAN13PARITY = map(lambda x: x+"CCCCCC",
-                  ["AAAAAA","AABABB","AABBAB","AABBBA","ABAABB",
-                   "ABBAAB","ABBBAA","ABABAB","ABABBA","ABBABA"])
+EAN13PARITY = [ x+"CCCCCC" for x in
+                ["AAAAAA","AABABB","AABBAB","AABBBA","ABAABB",
+                 "ABBAAB","ABBBAA","ABABAB","ABABBA","ABBABA"]]
 
 class ProductCodeError(Exception):
     msgs=[]
@@ -116,12 +115,12 @@ def parse(s,firstCharMap,lastCharMap,otherCharMap):
     # Parse errors get raised as KeyError.
     digits = []
     d = firstCharMap[s[0]]
-    if type(d)==IntType or d==None: digits.append(d)
+    if type(d) is int or d==None: digits.append(d)
     for c in s[1:-1]:
         d = otherCharMap[c]
-        if type(d)==IntType or d==None: digits.append(d)
+        if type(d) is int or d==None: digits.append(d)
     d = lastCharMap[s[-1]]
-    if type(d)==IntType or d==None: digits.append(d)
+    if type(d) is int or d==None: digits.append(d)
     return digits
 
 class ProductCode:
@@ -132,12 +131,12 @@ class ProductCode:
     label = ""
     def __init__(self,s):
         self.givenString = s
-        self.s = string.upper(s)
+        self.s = s.upper()
         try:
             self.digits = parse(s,self.firstCharMap,
                                   self.lastCharMap,
                                   self.otherCharMap)
-        except KeyError,m:
+        except KeyError as m:
             msg = "%s: %s invalid here" % (self.type,m)
             raise ProductCodeError(msg)
         i = self.resolveChecksum()
@@ -463,14 +462,14 @@ if __name__=="__main__":
     for s in tests:
         try:
             a = makeProductCode(s)
-            print s,"is valid as",a
-        except ProductCodeError,e:
-            print "%s invalid" % s
+            print(s,"is valid as",a)
+        except ProductCodeError as e:
+            print("%s invalid" % s)
 
     for s in tests:
         try:
             a = makeProductCode(s)
-            print a.bits
-        except ProductCodeError,e:
+            print(a.bits)
+        except ProductCodeError as e:
             pass
 

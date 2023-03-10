@@ -1,0 +1,13 @@
+
+Don't print numbers with %s... specify the format. Facilitates
+comparisons between versions.
+
+Switch to argparse
+
+Write unit tests
+
+Documentation: sphinx
+
+README -> README.md
+
+
