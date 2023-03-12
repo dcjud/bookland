@@ -34,6 +34,9 @@ MAINTAINER = "bookland-bugs@cgpp.com"
 from productcode import *
 import sys
 
+z = sys.version_info
+PYTHONVERSION = '%d.%d.%d' % (z.major, z.minor, z.micro)
+
 DEFAULTISBN = "1-56592-197-6" # Mark Lutz, "Programming Python",
                               # O'Reilly, Sebastopol CA, 1996
 
@@ -474,6 +477,8 @@ def doTheRightThing(s,font,price,moduleHeight,
 
     commandLine = ' '.join(sys.argv)
     epsComment = "%% Command line: %s" % commandLine
+    epsComment += "\n%% bookland: %s" % MYVERSION
+    epsComment += "\n%% python: %s" % PYTHONVERSION
     creator = "%s %s" % (MYNAME,MYVERSION)
     title = str(productCode)
     # suggested file name:
