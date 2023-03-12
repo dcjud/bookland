@@ -10,5 +10,7 @@ Documentation: sphinx
 
 scan13: documentation; get it running with python 3.
 
-os.popen() should be subprocess(), probably
+os.popen() should be subprocess(), maybe
+
+setuptools?
 

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/bin/env python
 #
 #   scan13 - utility to read bar codes from EPS files.
 #

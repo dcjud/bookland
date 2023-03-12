@@ -1,4 +1,4 @@
-#!/bin/env python3
+#!/bin/env python
 
 MYNAME="bookland"
 MYVERSION="2.0.0"
