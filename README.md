@@ -1,33 +1,66 @@
 
 
-bookland.py - generate EAN-13 bar codes, including ISBN and ISMN
+# bookland.py - generate EAN-13 bar codes, including ISBN and ISMN
 
 Copyright (C) 1999-2023 Judah Milgram     
 
 This is free software and comes with NO WARRANTY. See file COPYING for
 license.
 
-Version 1.1 is a major re-write. New features include:
-  - automatic recognition and handling of ISBN-10, ISBN-13, ISMN, and EAN-13.
-  - wildcard digits for any digit in product code (not limited to check digit)
-  - color may be input as cmyk or rgb. Always generates cmyk for EPS output.
-
-The program is split into two files:
-  - productcode.py contains classes for the product codes themselves
-  - bookland.py has the symbol classes, generates the Postscript output, and
-    contains the actual application.
-
 The program has NOT been tested. You're free to use it but make sure
 you can verify the bar codes it produces before you go to press with them.
 
-Bug reports to bookland-bugs@cgpp.com
+Bug reports, comments, new feature requests - please open an issue here.
 
-Usage:
+## Release History
 
-bookland [-h|--help] [-V|--version] [-f|--font=<font>] [-q]
-      [-s|--height=<height scale>] [-r --reduction=<points>]
-      [-o|outfile=<filename>] [-n|--noquietzone] [-a|--autofile]
-      [--cmyk=<c,m,y,k>] [--rgb=<r,g,b>] productCode [priceCode]
+### 2023-03-09 Version 2.0.0
+
+* Move to github: https://github.com/dcjud/bookland. This will be the official site.
+* Changes for Python 3.
+
+### 2011-07-25 Version 1.4.1
+* bookland: convert command-line cmyk values immediately to
+        float. Make sure we have four cmyk values, if given, and if rgb
+        given, that we have three values. Release as 1.4.1 Beta.
+
+### 2009-12-01 Version 1.4
+ * bookland: (Bookland.__init__): If built-in default ISBN
+   is being used, include warning on barcode image.    
+ * productcode.py: add __eq__ method to ISBN13
+
+### 2007-12-01 Version 1.3 
+* bookland: Add option "labelScale" (-b) to control size of
+        human-readable label above bars. If 0 < b <= 2, string is sized to
+        width of the bars multiplied by this factor. If b>2, then string
+        font is sized directly to "b" points.
+* (EAN13Symbol):  Added a quiet zone to the straight EAN-13 symbol.
+
+
+### 2007-03-11 Version 1.2
+  * bookland (Postscript.eps): add extraPadding option
+
+### 2007-02-24 Version 1.1
+
+Major re-write. New features include:
+  * automatic recognition and handling of ISBN-10, ISBN-13, ISMN, and EAN-13.
+  * wildcard digits for any digit in product code (not limited to check digit)
+  * color may be input as cmyk or rgb. Always generates cmyk for EPS output.
+
+The program is split into two files:
+  * productcode.py contains classes for the product codes themselves
+  * bookland.py has the symbol classes, generates the Postscript output, and
+    contains the actual application.
+
+
+
+
+## Usage:
+
+    bookland [-h|--help] [-V|--version] [-f|--font=<font>] [-q]
+             [-s|--height=<height scale>] [-r --reduction=<points>]
+             [-o|outfile=<filename>] [-n|--noquietzone] [-a|--autofile]
+             [--cmyk=<c,m,y,k>] [--rgb=<r,g,b>] productCode [priceCode]
 
 Generates an EPS file with the bar code symbol to standard output
 (default) or to a named file.
