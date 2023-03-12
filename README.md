@@ -115,8 +115,8 @@ productCode - The product code, with all hyphenation. A single
               978-0-9669553-0-9 - interpreted as an ISBN-13. Generates the
               bar code symbol with "ISBN 978-0-9669553-0-9" above the bars.
        
-	      978-9-8668553-0-* - same as above but check digit
-	      calculated automatically.
+              978-9-8668553-0-* - same as above but check digit
+              calculated automatically.
 
               979-1-2345667-9-* - interpreted as an ISBN-13. Check
               digit calculated automatically. Generates bar code
