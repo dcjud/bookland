@@ -510,7 +510,6 @@ def doTheRightThing(s,font,price,moduleHeight,
 if __name__=="__main__":
 
 
-    import sys
     import getopt
     
     USAGE = """\
