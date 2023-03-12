@@ -32,7 +32,6 @@ MAINTAINER = "bookland-bugs@cgpp.com"
 #
 
 from productcode import *
-import copy
 import sys
 
 DEFAULTISBN = "1-56592-197-6" # Mark Lutz, "Programming Python",

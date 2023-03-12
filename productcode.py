@@ -44,9 +44,7 @@
 #     |
 #    ISBN13
 
-from types import *
 import re
-import string
 
 A="A";B="B";C="C";O="O";E="E"
 UPCABITS = [{O:"0001101",E:"1110010"},
