@@ -440,7 +440,11 @@ class Bookland(Postscript):
         self.lines = ps.lines
 
 def rgbtocmyk(rgb):
-    r,g,b = rgb
+    'rgb to cmyk, (floating point representations)'
+    # Some hold such formulas to be fundamentally wrong.
+    # This is just a convenience for user.
+    # If color precision important, best consult with printer.
+    r,g,b = (float(x) for x in rgb)
     c,m,y = 1-r, 1-g, 1-b
     k = min(c,m,y)
     if k==1:
