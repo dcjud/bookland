@@ -25,7 +25,7 @@ class Test_rgbtocmyk(unittest.TestCase):
     def test_07(self):
         self.assertEqual(rgbtocmyk((1,1,1)),(0,  0,  0,  0))
 
-class ColorValOK(unittest.TestCase):
+class Test_colorValOK(unittest.TestCase):
     'Not much to look at here'
     def test_00(self):
         t = (2,0,0)
@@ -51,7 +51,9 @@ class ColorValOK(unittest.TestCase):
     def test_07(self):
         t = (0,0,0,0)
         self.assertTrue(colorValOK(t))
-    
+
+class Test_setfont(unittest.TestCase):
+    pass
 
 
 unittest.main()
